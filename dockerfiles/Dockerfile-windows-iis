@@ -1,0 +1,18 @@
+'''
+FROM microsoft/aspnet:4.7.2-windowsservercore-ltsc2016
+#ENV DOCKER_REGISTRY <acrName>.azurecr.io
+ENV DOCKER_REGISTRY dc995
+ARG source
+WORKDIR /inetpub/wwwroot
+COPY ${source:-obj/Docker/publish} .
+EXPOSE 80
+EXPOSE 8172
+EXPOSE 443
+'''
+
+## Deploying a Windows container
+az container create --resource-group winacirg --name samplewebapp2 --image dc995/samplewebapp2 --dns-name-label samplewebapp2dc995 --ports 80 --os-type Windows
+
+az container show --resource-group winacirg --name samplewebapp2 --query "{FQDN:ipAddress.fqdn,ProvisioningState:provisioningState,IP:ipAddress.ip}" --out table
+
+https://docs.microsoft.com/en-us/azure/container-instances/container-instances-troubleshooting#os-version-of-image-not-supported

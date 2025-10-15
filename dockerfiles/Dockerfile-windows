@@ -1,0 +1,5 @@
+Invoke-WebRequest http://10.240.0.108:3000 -UseBasicParsing
+
+RUN powershell.exe -Command Remove-Item c:\python-3.5.1.exe -Force
+
+https://docs.microsoft.com/en-us/virtualization/windowscontainers/manage-docker/optimize-windows-dockerfile

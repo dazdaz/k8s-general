@@ -1,0 +1,15 @@
+How to use a Dockerfile to apply the reg keys to a Microsoft/windowsservercore container image or any container image based off the
+Microsoft/windowsservercore container image
+```
+FROM Microsoft/windowsservercore
+SHELL ["powershell', "-Command", "$ErrorActionPreference = 'Stop';"]
+New-ItemProperty -Path 'HKLM:\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters' -Name MaxCacheTtl -Value 0 -Type DWord 
+New-ItemPropery -Path 'HKLM:\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters' -Name MaxNegativeCacheTtl -Value 0 -Type DWord
+```
+
+How to use a Dockerfile to apply the reg keys to a Microsoft/nanoserver container image or any container image based off the Microsoft/nanoserver container image
+```
+FROM Microsoft/nanoserver
+RUN cmd.exe /k REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters" /v MaxCacheTtl /t REG_DWORD /d 0
+RUN cmd.exe /k REG ADD "HKLM\SYSTEM\CurrentControlSet\Services\Dnscache\Parameters" /v MaxNegativeCacheTtl /t REG_DWORD /d 0 
+```

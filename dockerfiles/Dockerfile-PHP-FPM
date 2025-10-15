@@ -1,0 +1,9 @@
+https://hub.docker.com/r/bitnami/php-fpm
+https://hub.docker.com/r/bitnami/nginx
+https://docs.bitnami.com/containers/how-to/create-emp-environment-containers/
+https://community.bitnami.com/
+https://github.com/bitnami/bitnami-docker-php-fpm/blob/master/example/kubernetes.yml
+
+## Kubernetes
+https://docs.bitnami.com/kubernetes/how-to/deploy-php-application-kubernetes-helm/
+https://github.com/bitnami/tutorials/tree/master/phpfpm-k8s

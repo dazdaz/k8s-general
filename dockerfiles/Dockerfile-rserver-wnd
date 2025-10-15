@@ -1,0 +1,11 @@
+FROM microsoft/windowsservercore
+COPY ServerSetup.exe ServerSetup.exe
+RUN powershell -Command Start-Process ServerSetup.exe -ArgumentList '/quiet /install /full /models' -NoNewWindow -Wait
+RUN powershell -Command "Invoke-Expression 'az ml admin node setup --computenode' -ErrorAction 'Continue' 2>&1 | Out-Null"
+RUN powershell -Command Invoke-WebRequest 'https://cran.r-project.org/bin/windows/Rtools/Rtools34.exe' -OutFile Rtools34.exe
+RUN powershell -Command Start-Process Rtools34.exe -ArgumentList '/VERYSILENT' -NoNewWindow -Wait
+RUN powershell -Command Remove-Item Rtools34.exe
+RUN powershell -Command [System.Environment]::SetEnvironmentVariable('Path', $env:Path + ';C:\Rtools\bin', 'Machine')
+ENV R_HOME "C:/Program Files/Microsoft/ML Server/R_SERVER"
+RUN powershell -Command "(get-content $('{0}/bin/x64/Rserv.cfg' -f $env:R_HOME)) -replace 'remote disable', 'remote enable' | set-content $('{0}/bin/x64/Rserv.cfg' -f $env:R_HOME)"
+EXPOSE 9054

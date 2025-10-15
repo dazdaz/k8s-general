@@ -1,0 +1,4 @@
+Docker image to provide HTML5 VNC interface to access Ubuntu 16.04 LXDE desktop environment.
+https://github.com/fcwu/docker-ubuntu-vnc-desktop
+
+https://github.com/fcwu/docker-ubuntu-vnc-desktop/blob/master/Dockerfile.amd64

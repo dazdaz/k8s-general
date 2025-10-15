@@ -1,0 +1,8 @@
+FROM openjdk:9-b170-jre
+RUN useradd -m -d /app -s /bin/bash app
+WORKDIR /app
+USER app
+ENV HW_HOME=/app
+ADD HelloWorld.class $HW_HOME/
+WORKDIR $HW_HOME
+ENTRYPOINT ["java", "HelloWorld"]
