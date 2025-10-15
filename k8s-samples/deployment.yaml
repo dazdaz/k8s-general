@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: example
+  labels:
+    app: staging
+spec:
+  selector:
+    matchLabels:
+     app: staging
+  replicas: 4
+  template:
+    metadata:
+      labels:
+        app: staging
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.11.10-alpine

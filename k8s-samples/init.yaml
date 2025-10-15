@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: init-example
+spec:
+  volumes:
+    - name: workdir
+      emptyDir:
+  containers:
+  - name: checker
+    image: alpine
+    command: ["/bin/sh", "-c", "if [ -f /workdir/cool.txt ];
+              then sleep 100000; else exit 1; fi"]
+    volumeMounts:
+    - name: workdir
+      mountPath: /workdir
+  initContainers:
+  - name: install
+    image: alpine
+    command:
+    - touch
+    - "/workdir/cool.txt"
+    volumeMounts:
+    - name: workdir
+      mountPath: /workdir
